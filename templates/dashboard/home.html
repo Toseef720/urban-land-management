@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Dashboard - Urban Land Management
+{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% block styles %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    {% endblock %}
+</head>
+
+<body>
+    {% block content %}
+
+    <div class="dashboard-container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <div class="sidebar-header">
+                <h2>Urban Land</h2>
+                <p>Management System</p>
+            </div>
+
+            <nav>
+                <a href="#" class="active">Dashboard</a>
+                <a href="#">Manage Properties</a>
+                <a href="#">Upload Datasets</a>
+                <a href="#">Standardization</a>
+                <a href="#">Harmonization</a>
+                <a href="#">Conflicts</a>
+                <a href="#">Property Map</a>
+            </nav>
+
+            <a href="{% url 'logout' %}" class="logout-link">
+                Logout
+            </a>
+
+        </aside>
+
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <header class="dashboard-header">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p>Welcome to Urban Land Management System</p>
+                </div>
+
+                <div class="admin-info">
+                    Admin
+                </div>
+            </header>
+
+
+            <!-- Statistics -->
+            <section class="stats-container">
+
+                <div class="stat-card">
+                    <h3>Total Properties</h3>
+                    <h1>0</h1>
+                    <p>Registered properties</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Datasets Uploaded</h3>
+                    <h1>0</h1>
+                    <p>Imported datasets</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Matched Records</h3>
+                    <h1>0</h1>
+                    <p>Successfully matched</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Pending Conflicts</h3>
+                    <h1>0</h1>
+                    <p>Require review</p>
+                </div>
+
+            </section>
+
+
+            <!-- Recent Activity -->
+            <section class="activity-section">
+
+                <h2>Recent Activity</h2>
+
+                <div class="activity-box">
+                    <p>No activity available yet.</p>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    {% endblock %}
+
+</body>
+
+</html>
