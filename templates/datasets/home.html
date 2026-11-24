@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Datasets - Urban Land Management
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/datasets.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="datasets-page">
+    <h1>Dataset Management</h1>
+
+    {% if success_message %}
+        <p class="success-message">{{ success_message }}</p>
+    {% endif %}
+
+    <section>
+        <h2>Upload Dataset</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Upload Dataset</button>
+        </form>
+    </section>
+
+    <section class="import-history">
+        <h2>Import History</h2>
+        {% if imports %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Filename</th>
+                        <th>Department</th>
+                        <th>Format</th>
+                        <th>Upload date</th>
+                        <th>Status</th>
+                        <th>Records</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for import in imports %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'dataset_detail' import.id %}">
+                                    {{ import.original_filename }}
+                                </a>
+                            </td>
+                            <td>{{ import.get_source_department_display }}</td>
+                            <td>{{ import.file_format }}</td>
+                            <td>{{ import.uploaded_at|date:"Y-m-d H:i" }}</td>
+                            <td>{{ import.get_processing_status_display }}</td>
+                            <td>
+                                {{ import.accepted_records }} accepted /
+                                {{ import.rejected_records }} rejected
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No datasets have been uploaded yet.</p>
+        {% endif %}
+    </section>
+</main>
+{% endblock %}
