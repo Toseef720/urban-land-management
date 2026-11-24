@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Edit Property - Urban Land Management
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/properties.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="property-page">
+
+    <div class="property-container">
+
+        <h1>Edit Property</h1>
+
+        <p>Update the property information below.</p>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit">
+                Update Property
+            </button>
+
+        </form>
+
+        <a href="{% url 'property_list' %}">
+            Back to Properties
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

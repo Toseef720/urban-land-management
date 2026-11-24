@@ -1,0 +1,111 @@
+.property-page {
+    padding: 40px;
+}
+
+.property-container {
+    max-width: 750px;
+    margin: auto;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+}
+
+.property-container h1 {
+    margin-bottom: 10px;
+}
+
+.property-container form p {
+    margin: 20px 0;
+}
+
+.property-container form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.property-container form input,
+.property-container form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.property-container form button {
+    padding: 12px 25px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.property-container form button:hover {
+    background: #1d4ed8;
+}
+
+
+.property-card {
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.property-card img {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin-bottom: 15px;
+    border-radius: 6px;
+}
+
+.property-card h2 {
+    margin-bottom: 15px;
+}
+
+.property-card p {
+    margin: 8px 0;
+}
+
+
+.property-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.property-actions a,
+.property-actions button {
+    padding: 9px 18px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.property-actions a {
+    background: #2563eb;
+    color: white;
+}
+
+.property-actions button {
+    background: #dc2626;
+    color: white;
+}
+
+.property-actions a:hover {
+    background: #1d4ed8;
+}
+
+.property-actions button:hover {
+    background: #b91c1c;
+}
+
+.property-actions form {
+    margin: 0;
+}

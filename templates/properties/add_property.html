@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Add Property - Urban Land Management
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/properties.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="property-page">
+
+    <div class="property-container">
+
+        <h1>Add New Property</h1>
+
+        <p>Enter the property details below.</p>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit">
+                Save Property
+            </button>
+
+        </form>
+
+        <a href="{% url 'property_list' %}">
+            Back to Properties
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}
