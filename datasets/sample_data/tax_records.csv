@@ -1,0 +1,17 @@
+property_no,owner_name,address,tax_amount,tax_status
+P-001,Aisha Khan,12 Garden Road,1250,Paid
+P-002,  Bilal Ahmed  ,5 Cedar Avenue,980,Due
+P-003,Noor Hassan,18 Lake Street,1400,Paid
+P-004,Sara Malik,31 Palm Road,760,Due
+P-005,Usman Raza,7 Hill View,1100,Paid
+P-006,Zara Iqbal,22 Orchard Lane,890,Paid
+P-007,Hassan Ali,44 River Street,1320,Due
+P-008,Mehreen Shah,9 Sunset Avenue,670,Paid
+P-009,Omar Siddiqui,16 Market Road,1550,Due
+P-010,Laiba Tariq,28 Park Lane,920,Paid
+P-011,Ahmad Farooq,3 Station Road,1180,Overdue
+P-012,Hina Qureshi,52 School Street,830,Paid
+P-013,,61 Court Avenue,720,Due
+P-014,Samir Khan,19 Canal Road,1010,Paid
+P-014,Samir Khan,19 Canal Road,1450,Due
+P-015,Fariha Noor,8 North Road,,Due

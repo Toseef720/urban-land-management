@@ -1,0 +1,22 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {"type":"Feature","properties":{"parcel_id":"P-001","owner_name":"Aisha Khan","area_sqm":120,"zone":"Residential"},"geometry":{"type":"Polygon","coordinates":[[[67.000,24.000],[67.001,24.000],[67.001,24.001],[67.000,24.001],[67.000,24.000]]]}},
+    {"type":"Feature","properties":{"parcel_id":"P-002","owner_name":"Bilal Ahmed","area_sqm":95,"zone":"Residential"},"geometry":{"type":"Polygon","coordinates":[[[67.002,24.000],[67.003,24.000],[67.003,24.001],[67.002,24.001],[67.002,24.000]]]}},
+    {"type":"Feature","properties":{"parcel_id":"P-003","owner_name":"Noor Hassan","area_sqm":150,"zone":"Residential"},"geometry":{"type":"Polygon","coordinates":[[[67.004,24.000],[67.005,24.000],[67.005,24.001],[67.004,24.001],[67.004,24.000]]]}},
+    {"type":"Feature","properties":{"parcel_id":"P-004","owner_name":"Sara Malik","area_sqm":80,"zone":"Commercial"},"geometry":{"type":"Polygon","coordinates":[[[67.006,24.000],[67.007,24.000],[67.007,24.001],[67.006,24.001],[67.006,24.000]]]}},
+    {"type":"Feature","properties":{"parcel_id":"P-005","owner_name":"Usman Raza","area_sqm":110,"zone":"Residential"},"geometry":{"type":"Polygon","coordinates":[[[67.008,24.000],[67.009,24.000],[67.009,24.001],[67.008,24.001],[67.008,24.000]]]}},
+    {"type":"Feature","properties":{"parcel_id":"P-006","owner_name":"Zara Iqbal","area_sqm":135,"zone":"Residential"},"geometry":{"type":"Polygon","coordinates":[[[67.010,24.000],[67.011,24.000],[67.011,24.001],[67.010,24.001],[67.010,24.000]]]}},
+    {"type":"Feature","properties":{"parcel_id":"P-007","owner_name":"Hassan Ali","area_sqm":175,"zone":"Commercial"},"geometry":{"type":"Polygon","coordinates":[[[67.012,24.000],[67.013,24.000],[67.013,24.001],[67.012,24.001],[67.012,24.000]]]}},
+    {"type":"Feature","properties":{"parcel_id":"P-008","owner_name":"Mehreen Shah","area_sqm":88,"zone":"Residential"},"geometry":{"type":"Polygon","coordinates":[[[67.014,24.000],[67.015,24.000],[67.015,24.001],[67.014,24.001],[67.014,24.000]]]}},
+    {"type":"Feature","properties":{"parcel_id":"P-009","owner_name":"Omar Siddiqui","area_sqm":210,"zone":"Mixed"},"geometry":{"type":"Polygon","coordinates":[[[67.016,24.000],[67.017,24.000],[67.017,24.001],[67.016,24.001],[67.016,24.000]]]}},
+    {"type":"Feature","properties":{"parcel_id":"P-010","owner_name":"Laiba Tariq","area_sqm":125,"zone":"Residential"},"geometry":{"type":"Polygon","coordinates":[[[67.018,24.000],[67.019,24.000],[67.019,24.001],[67.018,24.001],[67.018,24.000]]]}},
+    {"type":"Feature","properties":{"parcel_id":"P-011","owner_name":"Ahmad Farooq","area_sqm":160,"zone":"Industrial"},"geometry":{"type":"Polygon","coordinates":[[[67.020,24.000],[67.021,24.000],[67.021,24.001],[67.020,24.001],[67.020,24.000]]]}},
+    {"type":"Feature","properties":{"parcel_id":"P-012","owner_name":"Hina Qureshi","area_sqm":92,"zone":"Residential"},"geometry":{"type":"Polygon","coordinates":[[[67.022,24.000],[67.023,24.000],[67.023,24.001],[67.022,24.001],[67.022,24.000]]]}},
+    {"type":"Feature","properties":{"parcel_id":"P-013","owner_name":"","area_sqm":78,"zone":"Residential"},"geometry":{"type":"Polygon","coordinates":[[[67.024,24.000],[67.025,24.000],[67.025,24.001],[67.024,24.001],[67.024,24.000]]]}},
+    {"type":"Feature","properties":{"parcel_id":"P-014","owner_name":"Samir Khan","area_sqm":140,"zone":"Commercial"},"geometry":{"type":"Polygon","coordinates":[[[67.026,24.000],[67.027,24.000],[67.027,24.001],[67.026,24.001],[67.026,24.000]]]}},
+    {"type":"Feature","properties":{"parcel_id":"P-018","owner_name":"Usman Javed","zone":"Residential"},"geometry":null},
+    {"type":"Feature","properties":{"parcel_id":"P-019","owner_name":"Nida Rehman","area_sqm":105,"zone":"Residential"},"geometry":{"type":"Polygon","coordinates":[[[67.030,24.000],[67.031,24.000],[67.031,24.001],[67.030,24.001],[67.030,24.000]]]}},
+    {"type":"Feature","properties":{"parcel_id":"P-020","owner_name":"Faisal Imran","area_sqm":260,"zone":"Mixed"},"geometry":{"type":"Polygon","coordinates":[[[67.032,24.000],[67.033,24.000],[67.033,24.001],[67.032,24.001],[67.032,24.000]]]}}
+  ]
+}

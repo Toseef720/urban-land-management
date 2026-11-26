@@ -162,6 +162,46 @@ http://127.0.0.1:8000/
 
 The development server should now be running.
 
+## Demo Login
+
+The project includes a demo session login that works for every team member after installing the project and applying migrations:
+
+- Username: `admin`
+- Password: `admin123`
+- Login URL: http://127.0.0.1:8000/
+
+This demo login is implemented in the source code and does not require database setup. It is intended for local academic development only.
+
+## Django Admin
+
+Django Admin is available at http://127.0.0.1:8000/admin/.
+
+Django Admin is separate from the demo login and requires a local superuser account. A superuser is stored in `db.sqlite3`, and that database is excluded from Git, so it will not be shared by pushing or pulling code.
+
+Create a personal local superuser after setup:
+
+```powershell
+python manage.py createsuperuser
+```
+
+Enter a username, an optional email, and a password when prompted. Each team member may use a different Django Admin account.
+
+## Dataset Upload Module
+
+The `/datasets/` page accepts:
+
+- `Land` department: `.geojson` files containing a GeoJSON `FeatureCollection`
+- `Property Tax` department: `.csv` files with `property_no`, `owner_name`, and `address`
+- `Utility` department: `.csv` files with `property_id`, `consumer_name`, `meter_id`, `address`, and `utility_type`
+
+Uploads are stored in `media/datasets/`. Django creates an import history record and preserves both original and normalized source values in SQLite. CSV and GeoJSON validation counts accepted and rejected records without automatically changing or overwriting Property records.
+
+Fictional sample files are available in `datasets/sample_data/`:
+
+- `land_parcels.geojson`
+- `tax_records.csv`
+- `utility_records.csv`
+
 ## Current Development Status
 
 The project is currently under development.
@@ -174,6 +214,10 @@ The project is currently under development.
 - Session-based login handling.
 - Dashboard page setup.
 - Separate CSS files for common styling, login, and dashboard.
+- Dataset Upload and Import Management for CSV and GeoJSON sources.
+- Import history and per-import validation result pages.
+- Original and normalized imported record preservation.
+- Upload and processing validation tests.
 - Git and GitHub repository setup.
 
 ### Planned

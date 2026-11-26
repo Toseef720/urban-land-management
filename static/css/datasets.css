@@ -1,0 +1,65 @@
+.datasets-page {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 24px;
+    background: #ffffff;
+    border-radius: 8px;
+}
+
+.datasets-page h1 {
+    margin-bottom: 12px;
+}
+
+.datasets-page section {
+    margin-top: 24px;
+}
+
+.datasets-page form {
+    margin-top: 16px;
+}
+
+.datasets-page form p {
+    margin-bottom: 12px;
+}
+
+.success-message {
+    margin-top: 16px;
+    padding: 12px;
+    background: #dff3df;
+    border: 1px solid #78b478;
+}
+
+.errorlist {
+    color: #a40000;
+    list-style: none;
+}
+
+.import-history table {
+    width: 100%;
+    margin-top: 16px;
+    border-collapse: collapse;
+}
+
+.import-history th,
+.import-history td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.import-summary {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.error-summary,
+.datasets-page td pre {
+    white-space: pre-wrap;
+    font-size: 12px;
+}
+
+.error-summary {
+    color: #a40000;
+}

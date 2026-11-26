@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Import Result - Urban Land Management
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/datasets.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="datasets-page">
+    <p><a href="{% url 'dataset_home' %}">Back to Dataset Management</a></p>
+    <h1>{{ dataset_import.original_filename }}</h1>
+
+    <dl class="import-summary">
+        <dt>Department</dt>
+        <dd>{{ dataset_import.get_source_department_display }}</dd>
+        <dt>Format</dt>
+        <dd>{{ dataset_import.file_format }}</dd>
+        <dt>Original file</dt>
+        <dd><a href="{{ dataset_import.source_file.url }}" target="_blank">Download source file</a></dd>
+        <dt>Status</dt>
+        <dd>{{ dataset_import.get_processing_status_display }}</dd>
+        <dt>Total records</dt>
+        <dd>{{ dataset_import.total_records }}</dd>
+        <dt>Accepted records</dt>
+        <dd>{{ dataset_import.accepted_records }}</dd>
+        <dt>Rejected records</dt>
+        <dd>{{ dataset_import.rejected_records }}</dd>
+    </dl>
+
+    {% if dataset_import.error_summary %}
+        <section>
+            <h2>Validation Errors</h2>
+            <pre class="error-summary">{{ dataset_import.error_summary }}</pre>
+        </section>
+    {% endif %}
+
+    <section>
+        <h2>Imported Records</h2>
+        {% if records %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Row / Feature</th>
+                        <th>Accepted</th>
+                        <th>Original Source Data</th>
+                        <th>Normalized Data</th>
+                        <th>Errors</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in records %}
+                        <tr>
+                            <td>{{ record.row_number }}</td>
+                            <td>{% if record.accepted %}Yes{% else %}No{% endif %}</td>
+                            <td><pre>{{ record.original_data }}</pre></td>
+                            <td><pre>{{ record.normalized_data }}</pre></td>
+                            <td>{{ record.validation_errors|default:"-" }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No records were created for this import.</p>
+        {% endif %}
+    </section>
+</main>
+{% endblock %}
