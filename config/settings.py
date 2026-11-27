@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'properties',
     'datasets',
     'standardization',
+    'harmonization',
 ]
 
 MIDDLEWARE = [

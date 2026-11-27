@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/harmonization.css' %}">
+{% endblock %}
+
+{% block title %}
+Data Harmonization - Urban Land Management
+{% endblock %}
+
+{% block content %}
+
+<main class="harmonization-page">
+
+    <h1>Data Harmonization</h1>
+
+    <p>
+        Match and connect standardized records with existing master properties.
+    </p>
+
+    <!-- Statistics -->
+    <section class="harmonization-stats">
+
+        <div class="stat-card">
+            <h3>Total Records</h3>
+            <p>{{ total_records }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Matched Records</h3>
+            <p>{{ matched_records }}</p>
+        </div>
+
+        <a href="{% url 'unmatched_records' %}" class="stat-card unmatched-link">
+            <h3>Unmatched Records</h3>
+            <p>{{ unmatched_records }}</p>
+            <span>View unmatched records →</span>
+        </a>
+
+        <div class="stat-card">
+            <h3>Invalid Records</h3>
+            <p>{{ invalid_records }}</p>
+        </div>
+
+    </section>
+
+    <!-- Records Table -->
+    <section class="harmonization-records">
+
+        <h2>Harmonization Results</h2>
+
+        {% if records %}
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Record ID</th>
+                    <th>Dataset</th>
+                    <th>Department</th>
+                    <th>Property ID</th>
+                    <th>Person Name</th>
+                    <th>Matched Property</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for record in records %}
+
+                <tr>
+                    <td>{{ record.standardization_result.source_record.id }}</td>
+
+                    <td>
+                        {{ record.standardization_result.source_record.dataset_import.original_filename }}
+                    </td>
+
+                    <td>
+                        {{ record.standardization_result.source_record.dataset_import.get_source_department_display }}
+                    </td>
+
+                    <td>
+                        {{ record.standardization_result.standardized_data.property_id }}
+                    </td>
+
+                    <td>
+                        {{ record.standardization_result.standardized_data.person_name }}
+                    </td>
+
+                    <td>
+                        {% if record.property %}
+                        {{ record.property.parcel_id }}
+                        {% else %}
+                        -
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if record.match_status == 'matched' %}
+                        <span class="matched-status">Matched</span>
+
+                        {% elif record.match_status == 'unmatched' %}
+                        <span class="unmatched-status">Unmatched</span>
+
+                        {% else %}
+                        <span class="invalid-status">Invalid</span>
+                        {% endif %}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+        {% else %}
+
+        <p>No harmonization records available yet.</p>
+
+        {% endif %}
+
+    </section>
+
+</main>
+
+{% endblock %}

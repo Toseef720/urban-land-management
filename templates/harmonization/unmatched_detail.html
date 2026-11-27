@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Unmatched Record Details{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/harmonization.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1>Unmatched Record Details</h1>
+    <p>Inspect the imported and standardized information for this record.</p>
+</div>
+
+<div class="dashboard-card">
+    <h2>Record Information</h2>
+
+    <table>
+        <tr>
+            <th>Record ID</th>
+            <td>{{ record.id }}</td>
+        </tr>
+        <tr>
+            <th>Dataset</th>
+            <td>{{ record.standardization_result.source_record.dataset_import.original_filename }}</td>
+        </tr>
+        <tr>
+            <th>Department</th>
+            <td>{{ record.standardization_result.source_record.dataset_import.get_source_department_display }}</td>
+        </tr>
+        <tr>
+            <th>Property ID</th>
+            <td>{{ record.standardization_result.standardized_data.property_id }}</td>
+        </tr>
+        <tr>
+            <th>Person Name</th>
+            <td>{{ record.standardization_result.standardized_data.person_name }}</td>
+        </tr>
+        <tr>
+            <th>Match Status</th>
+            <td>Unmatched</td>
+        </tr>
+        <tr>
+            <th>Reason</th>
+            <td>No master property found with this Property ID.</td>
+        </tr>
+    </table>
+</div>
+
+<div class="dashboard-card">
+    <h2>Standardized Data</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, value in record.standardization_result.standardized_data.items %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ value }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="dashboard-card">
+    <h2>Original Imported Data</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, value in record.standardization_result.source_record.original_data.items %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ value }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="dashboard-card">
+    <h2>Resolve This Record</h2>
+
+    <p>
+        If you have identified the correct master property,
+        you can manually link this record.
+    </p>
+
+    <a href="{% url 'manual_match' record.id %}" class="match-button">
+        Match with Master Property
+    </a>
+</div>
+
+<a href="{% url 'unmatched_records' %}" class="back-link">
+    ← Back to Unmatched Records
+</a>
+
+{% endblock %}

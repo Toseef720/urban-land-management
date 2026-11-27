@@ -14,3 +14,65 @@ body {
 a {
     text-decoration: none;
 }
+
+
+/* Navigation Bar */
+.navbar {
+    background: #1e293b;
+    padding: 0 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.navbar-container {
+    max-width: 1400px;
+    min-height: 70px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.navbar-brand {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.navbar-links a:hover {
+    color: #ffffff;
+}
+
+
+/* Responsive Navigation */
+@media (max-width: 900px) {
+    .navbar-container {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 18px 0;
+    }
+
+    .navbar-links {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+}

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Manual Property Matching{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/harmonization.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1>Manual Property Matching</h1>
+    <p>Review this unmatched record and select its correct master property.</p>
+</div>
+
+<div class="dashboard-card">
+    <h2>Unmatched Record Information</h2>
+
+    <table>
+        <tr>
+            <th>Record ID</th>
+            <td>{{ record.id }}</td>
+        </tr>
+        <tr>
+            <th>Department</th>
+            <td>{{ record.standardization_result.source_record.dataset_import.get_source_department_display }}</td>
+        </tr>
+        <tr>
+            <th>Dataset</th>
+            <td>{{ record.standardization_result.source_record.dataset_import.original_filename }}</td>
+        </tr>
+        <tr>
+            <th>Property ID</th>
+            <td>{{ record.standardization_result.standardized_data.property_id }}</td>
+        </tr>
+        <tr>
+            <th>Person Name</th>
+            <td>{{ record.standardization_result.standardized_data.person_name }}</td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td>{{ record.standardization_result.standardized_data.address|default:"Not available" }}</td>
+        </tr>
+    </table>
+</div>
+
+<div class="dashboard-card">
+    <h2>Select Master Property</h2>
+
+    <p>
+        Choose the existing master property that corresponds to this record.
+        Please verify the details before confirming.
+    </p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+            {{ form.property.label_tag }}
+            {{ form.property }}
+
+            {% if form.property.errors %}
+                <div class="error-message">
+                    {{ form.property.errors }}
+                </div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="match-button">
+            Confirm Match
+        </button>
+    </form>
+</div>
+
+<a href="{% url 'unmatched_record_detail' record.id %}" class="back-link">
+    ← Back to Record Details
+</a>
+
+{% endblock %}

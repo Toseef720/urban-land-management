@@ -64,7 +64,6 @@
 .main-content {
     flex: 1;
     min-width: 0;
-    padding: 30px;
 }
 
 .dashboard-header {
@@ -96,6 +95,10 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
+}
+
+header, .stats-container, .activity-section{
+    padding: 20px;
 }
 
 .stat-card {

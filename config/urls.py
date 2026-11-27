@@ -27,6 +27,7 @@ urlpatterns = [
     path('properties/', include('properties.urls')),
     path('datasets/', include('datasets.urls')),
     path('standardization/', include('standardization.urls')),
+    path('harmonization/', include('harmonization.urls')),
 ]
 
 urlpatterns += static(

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Unmatched Records{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/harmonization.css' %}">
+{% endblock %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="success-message">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1>Unmatched Records</h1>
+    <p>Records that could not be linked to an existing master property.</p>
+</div>
+
+<div class="dashboard-card">
+    <h2>Unmatched Records: {{ records.count }}</h2>
+
+    {% if records %}
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Record ID</th>
+                    <th>Dataset</th>
+                    <th>Department</th>
+                    <th>Property ID</th>
+                    <th>Person Name</th>
+                    <th>Reason</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for record in records %}
+                <tr>
+                    <a href="{% url 'unmatched_record_detail' record.id %}">
+                        {{ record.id }}
+                    </a>
+
+                    <td>
+                        {{ record.standardization_result.source_record.dataset_import.original_filename }}
+                    </td>
+
+                    <td>
+                        {{ record.standardization_result.source_record.dataset_import.get_source_department_display }}
+                    </td>
+
+                    <td>
+                        {{ record.standardization_result.standardized_data.property_id }}
+                    </td>
+
+                    <td>
+                        {{ record.standardization_result.standardized_data.person_name }}
+                    </td>
+
+                    <td>
+                        No master property found with this Property ID.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% else %}
+    <p class="empty-message">No unmatched records found.</p>
+    {% endif %}
+</div>
+
+<a href="{% url 'harmonization_home' %}" class="back-link">
+    ← Back to Harmonization Dashboard
+</a>
+
+{% endblock %}
