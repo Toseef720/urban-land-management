@@ -1,0 +1,83 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Data Standardization - Urban Land Management
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/standardization.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="standardization-page">
+
+    <h1>Data Standardization</h1>
+    <p>View and manage standardized records from different departments.</p>
+
+    <section class="standardization-stats">
+        <div class="stat-card">
+            <h3>Total Records</h3>
+            <p>{{ total_records }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Valid Records</h3>
+            <p>{{ valid_records }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Invalid Records</h3>
+            <p>{{ invalid_records }}</p>
+        </div>
+    </section>
+
+    <section class="standardization-records">
+        <h2>Standardized Records</h2>
+
+        {% if results %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Record ID</th>
+                    <th>Source Dataset</th>
+                    <th>Department</th>
+                    <th>Property ID</th>
+                    <th>Person Name</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for result in results %}
+                <tr>
+                    <td>{{ result.source_record.id }}</td>
+                    <td>{{ result.source_record.dataset_import.original_filename }}</td>
+                    <td>{{ result.source_record.dataset_import.get_source_department_display }}</td>
+                    <td>{{ result.standardized_data.property_id|default:"-" }}</td>
+                    <td>{{ result.standardized_data.person_name|default:"-" }}</td>
+                    <td>
+                        {% if result.is_valid %}
+                            <span class="valid-status">Valid</span>
+                        {% else %}
+                            <span class="invalid-status">Invalid</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'standardization_detail' result.id %}">
+                            View Details
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p>No standardized records available yet.</p>
+        {% endif %}
+    </section>
+
+</main>
+{% endblock %}

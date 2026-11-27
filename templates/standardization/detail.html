@@ -1,0 +1,95 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Standardized Record Details - Urban Land Management
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/standardization.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="standardization-page">
+
+    <h1>Standardized Record Details</h1>
+
+    <section class="record-info">
+        <h2>Record Information</h2>
+
+        <p><strong>Standardization ID:</strong> {{ result.id }}</p>
+        <p><strong>Source Record ID:</strong> {{ result.source_record.id }}</p>
+        <p><strong>Source Dataset:</strong> {{ result.source_record.dataset_import.original_filename }}</p>
+        <p><strong>Department:</strong> {{ result.source_record.dataset_import.get_source_department_display }}</p>
+        <p><strong>Processed At:</strong> {{ result.processed_at|date:"Y-m-d H:i" }}</p>
+
+        <p>
+            <strong>Status:</strong>
+            {% if result.is_valid %}
+                <span class="valid-status">Valid</span>
+            {% else %}
+                <span class="invalid-status">Invalid</span>
+            {% endif %}
+        </p>
+    </section>
+
+    <section class="standardized-data">
+        <h2>Standardized Data</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Field</th>
+                    <th>Standardized Value</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for key, value in result.standardized_data.items %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ value|default:"-" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    {% if result.errors %}
+    <section class="validation-errors">
+        <h2>Validation Errors</h2>
+        <p>{{ result.errors|linebreaksbr }}</p>
+    </section>
+    {% endif %}
+
+    <section class="original-data">
+        <!-- Your existing original data table stays here -->
+    </section>
+
+    <section class="original-data">
+        <h2>Original Imported Data</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Field</th>
+                    <th>Original Value</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for key, value in result.source_record.original_data.items %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ value }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <a href="{% url 'standardization_home' %}">Back to Standardization</a>
+
+</main>
+{% endblock %}

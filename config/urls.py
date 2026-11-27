@@ -26,6 +26,7 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
     path('properties/', include('properties.urls')),
     path('datasets/', include('datasets.urls')),
+    path('standardization/', include('standardization.urls')),
 ]
 
 urlpatterns += static(
