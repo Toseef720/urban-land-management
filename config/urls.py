@@ -28,6 +28,7 @@ urlpatterns = [
     path('datasets/', include('datasets.urls')),
     path('standardization/', include('standardization.urls')),
     path('harmonization/', include('harmonization.urls')),
+    path('conflicts/', include('conflicts.urls')),
 ]
 
 urlpatterns += static(

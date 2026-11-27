@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/conflicts.css' %}">
+{% endblock %}
+
+{% block title %}
+Resolve Conflict {{ conflict.id }} - Urban Land Management
+{% endblock %}
+
+{% block content %}
+<main class="conflicts-page">
+    <a class="conflict-back-link"
+        href="{% url 'conflict_detail' conflict.id %}">Back to conflict details</a>
+
+    <h1>Resolve Conflict</h1>
+    <p>
+        Property {{ conflict.property.parcel_id }} ·
+        {{ conflict.get_field_name_display }}
+    </p>
+    <p>The original departmental records and master property will not be changed.</p>
+
+    <section class="conflict-resolution-form">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <div class="resolution-form-field">
+                {{ form.source_value.label_tag }}
+                {{ form.source_value }}
+                {{ form.source_value.errors }}
+            </div>
+
+            <div class="resolution-form-field">
+                {{ form.corrected_value.label_tag }}
+                {{ form.corrected_value }}
+                {{ form.corrected_value.errors }}
+            </div>
+
+            <div class="resolution-form-field">
+                {{ form.resolution_note.label_tag }}
+                {{ form.resolution_note }}
+                {{ form.resolution_note.errors }}
+            </div>
+
+            <button type="submit" class="detect-button">Confirm resolution</button>
+        </form>
+    </section>
+</main>
+{% endblock %}

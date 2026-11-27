@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'datasets',
     'standardization',
     'harmonization',
+    'conflicts',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/conflicts.css' %}">
+{% endblock %}
+
+{% block title %}
+Conflict Management - Urban Land Management
+{% endblock %}
+
+{% block content %}
+<main class="conflicts-page">
+    <header class="conflicts-header">
+        <div>
+            <h1>Conflict Management</h1>
+            <p>Review inconsistencies found across matched departmental records.</p>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="detect-button">Run conflict detection</button>
+        </form>
+    </header>
+
+    {% if messages %}
+    <section class="conflict-messages" aria-live="polite">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </section>
+    {% endif %}
+
+    <section class="conflict-stats" aria-label="Conflict totals">
+        <article class="conflict-stat">
+            <h2>Total conflicts</h2>
+            <p>{{ counts.total }}</p>
+        </article>
+        <article class="conflict-stat">
+            <h2>Pending</h2>
+            <p>{{ counts.pending }}</p>
+        </article>
+        <article class="conflict-stat">
+            <h2>Resolved</h2>
+            <p>{{ counts.resolved }}</p>
+        </article>
+        <article class="conflict-stat">
+            <h2>Cleared</h2>
+            <p>{{ counts.cleared }}</p>
+        </article>
+    </section>
+
+    <section class="conflict-field-summary">
+        <h2>Conflicts by field</h2>
+        {% if conflicts_by_field %}
+        <ul>
+            {% for item in conflicts_by_field %}
+            <li><span>{{ item.label }}</span><strong>{{ item.count }}</strong></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No conflicts have been detected.</p>
+        {% endif %}
+    </section>
+
+    <section class="conflict-list">
+        <h2>Detected conflicts</h2>
+        {% if conflicts %}
+        <div class="conflict-table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Conflict ID</th>
+                        <th>Property ID</th>
+                        <th>Field</th>
+                        <th>Department values</th>
+                        <th>Status</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for conflict in conflicts %}
+                    <tr>
+                        <td>{{ conflict.id }}</td>
+                        <td>{{ conflict.property.parcel_id }}</td>
+                        <td>{{ conflict.get_field_name_display }}</td>
+                        <td>
+                            <ul class="department-values">
+                                {% for item in conflict.values.all %}
+                                <li>
+                                    {{ item.standardization_result.source_record.dataset_import.get_source_department_display }}:
+                                    {{ item.value_snapshot }}
+                                </li>
+                                {% empty %}
+                                <li>No source values recorded.</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            <span class="conflict-status status-{{ conflict.status }}">
+                                {{ conflict.get_status_display }}
+                            </span>
+                        </td>
+                        <td>
+                            <a class="conflict-details-link"
+                                href="{% url 'conflict_detail' conflict.id %}">View details</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p>No detected conflicts yet. Run conflict detection after records have been harmonized.</p>
+        {% endif %}
+    </section>
+</main>
+{% endblock %}

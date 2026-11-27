@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/conflicts.css' %}">
+{% endblock %}
+
+{% block title %}
+Conflict {{ conflict.id }} - Urban Land Management
+{% endblock %}
+
+{% block content %}
+<main class="conflicts-page">
+    <a class="conflict-back-link" href="{% url 'conflict_dashboard' %}">Back to conflicts</a>
+
+    <header class="conflicts-header">
+        <div>
+            <h1>Conflict Details</h1>
+            <p>Property {{ conflict.property.parcel_id }} · {{ conflict.get_field_name_display }}</p>
+        </div>
+        <span class="conflict-status status-{{ conflict.status }}">
+            {{ conflict.get_status_display }}
+        </span>
+    </header>
+
+    {% if messages %}
+    <section class="conflict-messages" aria-live="polite">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </section>
+    {% endif %}
+
+    <section class="conflict-comparison">
+        <h2>Department comparison</h2>
+        <div class="conflict-table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        {% for department in departments %}
+                        <th>{{ department.label }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>{{ conflict.get_field_name_display }}</th>
+                        {% for department in departments %}
+                        <td>
+                            {% if department.values %}
+                            <ul class="comparison-values">
+                                {% for item in department.values %}
+                                <li>
+                                    <strong>{{ item.value_snapshot }}</strong>
+                                    {% if item.standardization_result.standardized_data.name_role %}
+                                    <small>Role: {{ item.standardization_result.standardized_data.name_role }}</small>
+                                    {% endif %}
+                                    <small>
+                                        {{ item.standardization_result.source_record.dataset_import.original_filename }}
+                                        (record {{ item.standardization_result.source_record.id }})
+                                    </small>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                            <span class="comparison-unavailable">Not available</span>
+                            {% endif %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    {% if conflict.resolution %}
+    <section class="conflict-resolution-summary">
+        <h2>Resolution</h2>
+        <p><strong>Selected value:</strong> {{ conflict.resolution.resolved_value }}</p>
+        <p><strong>Note:</strong> {{ conflict.resolution.resolution_note }}</p>
+        <p><strong>Resolved:</strong> {{ conflict.resolution.resolved_at }}</p>
+    </section>
+    {% elif conflict.status == 'pending' %}
+    <a class="detect-button resolve-conflict-link"
+        href="{% url 'resolve_conflict' conflict.id %}">Resolve conflict</a>
+    {% endif %}
+</main>
+{% endblock %}
